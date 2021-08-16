@@ -3,7 +3,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
-
+from .models import Role
 
 auth = Blueprint('auth', __name__)
 
@@ -57,6 +57,8 @@ def sign_up():
         else:
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
+            role = Role.query.filter_by(role_name="ADMIN").first()
+            new_user.roles.append(role)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
