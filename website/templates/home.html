@@ -13,7 +13,7 @@
         <span aria-hidden="true">&#9998;</span>
       </button>
       <!-- our form for edit -->
-        <div class="show">
+        <div class="showNote">
           <form action="{{url_for('views.edit_note', nid=note.id)}}" method="POST">
           <textarea name="text" id="text" class="form-control">{{note.data}}</textarea>
           <div align="left">
@@ -37,8 +37,7 @@
 
 <script type="text/javascript">
   function toggleShow(item){
-    console.log("here!")
-    $(item).next(".show").toggle();
+    $(item).next(".showNote").toggle();
   }
 </script>
 {% endblock %}
